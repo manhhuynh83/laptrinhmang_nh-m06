@@ -112,4 +112,47 @@ def main():
     args = parser.parse_args()
  print("Cấu hình:", args)
     cpu_param = adaptive_cpu_param()
+  if args.mode == "sequential":
+        elapsed, _, _ = run_sequential(args.cpu_jobs, cpu_param, args.io_jobs, args.io_duration)
+        print(f"[Chạy tuần tự] Thời gian: {elapsed:.3f}s")
+    elif args.mode == "threads":
+        elapsed = run_threads(args.cpu_jobs, cpu_param, args.io_jobs, args.io_duration, args.max_workers)
+        print(f"[ThreadPoolExecutor] Thời gian: {elapsed:.3f}s")
+    elif args.mode == "processes":
+        elapsed = run_processes(args.cpu_jobs, cpu_param, args.io_jobs, args.io_duration, args.max_workers)
+        print(f"[ProcessPoolExecutor] Thời gian: {elapsed:.3f}s")
+    elif args.mode == "asyncio":
+        elapsed = asyncio.run(run_asyncio_io_only(args.io_jobs, args.io_duration))
+        print(f"[AsyncIO (I/O)] Thời gian: {elapsed:.3f}s")
+    elif args.mode == "mixed":
+        elapsed = asyncio.run(run_mixed(args.cpu_jobs, cpu_param, args.io_jobs, args.io_duration, args.max_workers))
+        print(f"[Kết hợp asyncio + ProcessPool] Thời gian: {elapsed:.3f}s")
+    elif args.mode == "primes":
+        nums = generate_large_primes(args.cpu_jobs, start=10_000_000)
+        print("Kiểm tra số nguyên tố của:", nums)
+        # Tuần tự
+        t0 = time.perf_counter()
+        sseq = [is_prime(n) for n in nums]
+        tseq = time.perf_counter() - t0
+        print(f"Tuần tự: {tseq:.3f}s")
+        # Threads
+        t0 = time.perf_counter()
+        with ThreadPoolExecutor(max_workers=args.max_workers) as ex:
+            futures = [ex.submit(is_prime, n) for n in nums]
+            for f in as_completed(futures):
+                _ = f.result()
+        tthr = time.perf_counter() - t0
+        print(f"Threads: {tthr:.3f}s")
+        # Processes
+        t0 = time.perf_counter()
+        with ProcessPoolExecutor(max_workers=args.max_workers) as ex:
+            futures = [ex.submit(is_prime, n) for n in nums]
+            for f in as_completed(futures):
+                _ = f.result()
+        tproc = time.perf_counter() - t0
+        print(f"Processes: {tproc:.3f}s")
+    else:
+        print("Chế độ không hợp lệ.")
 
+if __name__ == "__main__":
+    main()
