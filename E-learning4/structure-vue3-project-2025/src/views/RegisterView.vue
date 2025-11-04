@@ -1,7 +1,7 @@
 <template>
-  <div class="login-container">
-    <h2>Đăng nhập</h2>
-    <form @submit.prevent="login">
+  <div class="register-container">
+    <h2>Đăng ký tài khoản</h2>
+    <form @submit.prevent="register">
       <div class="form-group">
         <label>Email:</label>
         <input v-model="email" type="email" placeholder="Nhập email..." required />
@@ -12,12 +12,17 @@
         <input v-model="password" type="password" placeholder="Nhập mật khẩu..." required />
       </div>
 
-      <button type="submit">Đăng nhập</button>
+      <div class="form-group">
+        <label>Xác nhận mật khẩu:</label>
+        <input v-model="confirmPassword" type="password" placeholder="Nhập lại mật khẩu..." required />
+      </div>
+
+      <button type="submit">Đăng ký</button>
     </form>
 
-    <p class="register-link">
-      Chưa có tài khoản?
-      <router-link to="/register">Đăng ký ngay</router-link>
+    <p class="login-link">
+      Đã có tài khoản?
+      <router-link to="/login">Đăng nhập</router-link>
     </p>
   </div>
 </template>
@@ -27,19 +32,20 @@ import { ref } from 'vue'
 
 const email = ref('')
 const password = ref('')
+const confirmPassword = ref('')
 
-function login() {
-  if (!email.value || !password.value) {
-    alert('Vui lòng nhập đầy đủ thông tin!')
+function register() {
+  if (password.value !== confirmPassword.value) {
+    alert('Mật khẩu không khớp!')
     return
   }
 
-  alert(`Đăng nhập thành công với tài khoản: ${email.value}`)
+  alert(`Đăng ký thành công cho tài khoản: ${email.value}`)
 }
 </script>
 
 <style scoped>
-.login-container {
+.register-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 25px;
@@ -90,18 +96,18 @@ button:hover {
   background-color: #2c3e50;
 }
 
-.register-link {
+.login-link {
   text-align: center;
   margin-top: 15px;
 }
 
-.register-link a {
+.login-link a {
   color: #42b983;
   text-decoration: none;
   font-weight: bold;
 }
 
-.register-link a:hover {
+.login-link a:hover {
   text-decoration: underline;
 }
 </style>

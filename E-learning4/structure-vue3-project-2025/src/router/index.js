@@ -1,8 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 
-//Import các trang (views)
-import HomeView from '../views/HomeView.vue';
-import LoginView from '../views/LoginView.vue';
+// Nhập các component view
+import HomeView from '../views/HomeView.vue'
+import RegisterView from '../views/RegisterView.vue'
+import LoginView from '../views/LoginView.vue'
 
 const routes = [
   {
@@ -11,14 +12,14 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/register',
+    name: 'register',
+    component: RegisterView
+  },
+  {
     path: '/login',
     name: 'login',
     component: LoginView
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'not-found',
-    component: () => import('../views/NotFound.vue')
   }
 ]
 

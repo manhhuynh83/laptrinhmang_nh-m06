@@ -1,58 +1,55 @@
 <template>
   <div id="app">
-    <header>
-      <h1>🌐 E-Learning System</h1>
-      <nav>
-        <router-link to="/">Trang chủ</router-link> |
-        <router-link to="/login">Đăng nhập</router-link>
-      </nav>
-    </header>
+    <nav>
+      <router-link to="/">Trang chủ</router-link> |
+      <router-link to="/login">Đăng nhập</router-link> |
+      <router-link to="/register">Đăng ký</router-link>  |
+    </nav>
 
     <main>
       <router-view />
     </main>
-
-    <footer>
-      <p>© 2025 E-Learning Project - Lập trình mạng</p>
-    </footer>
   </div>
 </template>
 
-<script setup></script>
+<script>
+export default {
+  name: 'App'
+}
+</script>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fafafa;
+/* Căn giữa nội dung */
+#app {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
 }
 
-header {
-  background-color: #2c3e50;
-  color: white;
-  padding: 10px 20px;
+/* Thanh menu */
+nav {
+  margin-bottom: 30px;
 }
 
 nav a {
-  color: white;
-  margin: 0 10px;
   text-decoration: none;
+  color: #007bff;
+  margin: 0 10px;
 }
 
-nav a.router-link-active {
+nav a.router-link-exact-active {
   font-weight: bold;
-  border-bottom: 2px solid #42b983;
+  color: #0056b3;
 }
 
+/* Vùng nội dung */
 main {
+  border: 1px solid #ddd;
   padding: 20px;
-}
-
-footer {
-  background-color: #f5f5f5;
-  text-align: center;
-  padding: 10px;
-  font-size: 14px;
-  color: #555;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fafafa;
 }
 </style>
