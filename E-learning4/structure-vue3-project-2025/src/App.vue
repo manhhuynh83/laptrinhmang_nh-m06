@@ -7,7 +7,7 @@ import DefaultLayout from './components/layout/DefaultLayout.vue'
 </script>
 
 <style>
-body{
+body {
   margin: 0;
-  }
-  </style>
+}
+</style>

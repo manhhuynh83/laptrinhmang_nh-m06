@@ -1,25 +1,32 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import DefaultLayout from '../components/layout/DefaultLayout.vue'
+import AuthLayout from '../components/layout/AuthLayout.vue'
 
-// Nhập các component view
 import HomeView from '../views/HomeView.vue'
-import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
+import RegisterView from '../views/RegisterView.vue'
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    component: DefaultLayout,
+    children: [
+      { path: '', name: 'Home', component: HomeView },
+    ]
   },
   {
-    path: '/register',
-    name: 'register',
-    component: RegisterView
+    path: '/',
+    component: AuthLayout,
+    children: [
+      { path: 'login', name: 'Login', component: LoginView },
+      { path: 'register', name: 'Register', component: RegisterView },
+    ]
   },
   {
-    path: '/login',
-    name: 'login',
-    component: LoginView
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 
