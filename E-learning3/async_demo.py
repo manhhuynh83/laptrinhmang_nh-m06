@@ -88,3 +88,28 @@ async def run_mixed(cpu_jobs, cpu_param, io_jobs, io_duration, max_workers=None)
     results = await asyncio.gather(*(cpu_futs + io_coros))
     elapsed = time.perf_counter() - start
     return elapsed
+# Tiện ích bổ sung 
+def generate_large_primes(count, start=10_000_000):
+    """Sinh ra một danh sách số lớn để kiểm tra nguyên tố."""
+    nums = []
+    base = start
+    for i in range(count):
+        nums.append(base + i * 2 + (1 if i % 2 == 0 else 3))
+    return nums
+
+def adaptive_cpu_param():
+    """Chọn tham số CPU vừa đủ nặng để so sánh (tính Fibonacci)."""
+    return 100_000
+
+# Hàm chính (CLI)
+def main():
+    parser = argparse.ArgumentParser(description="Ứng dụng mô phỏng kỹ thuật bất đồng bộ nhằm tăng hiệu suất đồng thời.")
+    parser.add_argument("--mode", choices=["sequential","threads","processes","asyncio","mixed","primes"], default="mixed", help="Chế độ chạy")
+    parser.add_argument("--cpu_jobs", type=int, default=4, help="Số tác vụ CPU-bound")
+    parser.add_argument("--io_jobs", type=int, default=16, help="Số tác vụ I/O-bound")
+    parser.add_argument("--io_duration", type=float, default=0.5, help="Thời gian mô phỏng I/O (giây)")
+    parser.add_argument("--max_workers", type=int, default=None, help="Số luồng/tiến trình tối đa cho pool")
+    args = parser.parse_args()
+ print("Cấu hình:", args)
+    cpu_param = adaptive_cpu_param()
+
