@@ -9,10 +9,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.22"
+    "@vueuse/core": "^14.0.0",
+    "axios": "^1.13.1",
+    "pinia": "^3.0.3",
+    "sweetalert2": "^11.26.3",
+    "vee-validate": "^4.15.1",
+    "vite-plugin-env-compatible": "^2.0.1",
+    "vue": "^3.5.22",
+    "vue-router": "^4.6.3",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
-    "vite": "^7.1.7"
+    "@vue/test-utils": "^2.4.6",
+    "autoprefixer": "^10.4.21",
+    "jsdom": "^27.1.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.16",
+    "vite": "^7.1.7",
+    "vitest": "^4.0.6"
   }
 }

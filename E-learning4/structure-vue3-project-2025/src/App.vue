@@ -1,30 +1,58 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="app">
+    <header>
+      <h1>🌐 E-Learning System</h1>
+      <nav>
+        <router-link to="/">Trang chủ</router-link> |
+        <router-link to="/login">Đăng nhập</router-link>
+      </nav>
+    </header>
+
+    <main>
+      <router-view />
+    </main>
+
+    <footer>
+      <p>© 2025 E-Learning Project - Lập trình mạng</p>
+    </footer>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fafafa;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px 20px;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+nav a.router-link-active {
+  font-weight: bold;
+  border-bottom: 2px solid #42b983;
+}
+
+main {
+  padding: 20px;
+}
+
+footer {
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  color: #555;
 }
 </style>
