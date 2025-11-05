@@ -29,7 +29,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
@@ -40,9 +42,29 @@ function register() {
     return
   }
 
-  alert(`Đăng ký thành công cho tài khoản: ${email.value}`)
+  // Lấy danh sách users hiện có (nếu chưa có thì mảng rỗng)
+  const users = JSON.parse(localStorage.getItem('users') || '[]')
+
+  // Kiểm tra email đã tồn tại chưa
+  if (users.some(u => u.email === email.value)) {
+    alert('Email này đã được đăng ký!')
+    return
+  }
+
+  // Thêm user mới
+  users.push({
+    email: email.value,
+    password: password.value
+  })
+
+  localStorage.setItem('users', JSON.stringify(users))
+  alert('Đăng ký thành công!')
+
+  // Chuyển hướng sang trang đăng nhập
+  router.push('/login')
 }
 </script>
+
 
 <style scoped>
 .register-container {

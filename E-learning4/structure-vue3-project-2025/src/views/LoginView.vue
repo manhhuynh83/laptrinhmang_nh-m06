@@ -24,18 +24,31 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const email = ref('')
 const password = ref('')
 
 function login() {
+  
   if (!email.value || !password.value) {
     alert('Vui lòng nhập đầy đủ thông tin!')
     return
   }
 
-  alert(`Đăng nhập thành công với tài khoản: ${email.value}`)
+  const users = JSON.parse(localStorage.getItem('users') || '[]')
+  const found = users.find(u => u.email === email.value && u.password === password.value)
+
+  if (found) {
+    alert(`Đăng nhập thành công! Xin chào ${email.value}`)
+    localStorage.setItem('loggedInUser', email.value)
+    router.push('/') // chuyển hướng về trang chủ
+  } else {
+    alert('Sai email hoặc mật khẩu!')
+  }
 }
+
 </script>
 
 <style scoped>
