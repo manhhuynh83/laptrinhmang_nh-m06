@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kéo Búa Bao - Đối Kháng 1v1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Màn hình chính -->
+        <div class="screen active" id="menuScreen">
+            <div class="logo">
+                <div class="logo-icons">
+                    <span>✊</span>
+                    <span>✋</span>
+                    <span>✌️</span>
+                </div>
+                <h1>Kéo Búa Bao</h1>
+                <p class="subtitle">Đối kháng 1v1 trực tuyến</p>
+            </div>
+
+            <div class="menu-card">
+                <div class="input-group">
+                    <label for="nameInput">Tên của bạn</label>
+                    <input type="text" id="nameInput" placeholder="Nhập tên..." maxlength="15">
+                </div>
+
+                <div class="action-buttons">
+                    <button id="createRoomBtn" class="btn btn-primary">
+                        <span class="btn-icon">🎯</span>
+                        Tạo phòng mới
+                    </button>
+                    <button id="showJoinBtn" class="btn btn-secondary">
+                        <span class="btn-icon">🔗</span>
+                        Tham gia phòng
+                    </button>
+                </div>
+
+                <div class="join-section" id="joinSection">
+                    <div class="input-group">
+                        <label for="roomInput">Mã phòng</label>
+                        <input type="text" id="roomInput" placeholder="Nhập mã phòng..." maxlength="6">
+                    </div>
+                    <button id="joinRoomBtn" class="btn btn-join">
+                        <span class="btn-icon">🎮</span>
+                        Vào game
+                    </button>
+                </div>
+
+                <div id="message" class="message"></div>
+            </div>
+        </div>
+
+        <!-- Màn hình game -->
+        <div class="screen" id="gameScreen">
+            <div class="game-header">
+                <div class="room-info">
+                    <span class="room-icon">🚪</span>
+                    <span id="roomTitle">Phòng: ----</span>
+                </div>
+                <div class="players-count">
+                    <span id="playersCount">1/2</span> người chơi
+                </div>
+            </div>
+
+            <div class="game-area">
+                <div class="players-display">
+                    <div class="player" id="player1">
+                        <div class="player-avatar">👤</div>
+                        <div class="player-name" id="p1Name">Đang chờ...</div>
+                        <div class="choice-display" id="p1Choice">❓</div>
+                        <div class="player-status" id="p1Status">Chưa chọn</div>
+                    </div>
+
+                    <div class="vs">VS</div>
+
+                    <div class="player" id="player2">
+                        <div class="player-avatar">👤</div>
+                        <div class="player-name" id="p2Name">Đang chờ...</div>
+                        <div class="choice-display" id="p2Choice">❓</div>
+                        <div class="player-status" id="p2Status">Chưa chọn</div>
+                    </div>
+                </div>
+
+                <div class="choices-container">
+                    <h3>Chọn lựa chọn của bạn:</h3>
+                    <div class="choices" id="choices">
+                        <button class="choice-btn" data-choice="rock">
+                            <span class="choice-emoji">✊</span>
+                            <span class="choice-label">Búa</span>
+                        </button>
+                        <button class="choice-btn" data-choice="paper">
+                            <span class="choice-emoji">✋</span>
+                            <span class="choice-label">Bao</span>
+                        </button>
+                        <button class="choice-btn" data-choice="scissors">
+                            <span class="choice-emoji">✌️</span>
+                            <span class="choice-label">Kéo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3 id="resultText">Chào mừng đến với game!</h3>
+                <p id="choicesText">Hãy chọn một lựa chọn để bắt đầu</p>
+            </div>
+
+            <button id="backToMenu" class="btn btn-back">
+                <span class="btn-icon">←</span>
+                Về menu
+            </button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
